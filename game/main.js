@@ -1,13 +1,30 @@
 document.getElementById("txt").innerText="これはゲームです";
 const canvas=document.getElementById("gameCanvas");
 const ctx=canvas.getContext("2d");
+const player={
+    x:canvas.width/2-15,
+    y:canvas.height-60,
+    width:30,
+    height:30,
+    color:"yellow",
+    life:3,
+};
+const bullets=[];
+const BULLET_SPEED=-10;
 
-//fillRect(x座標(横),y座標(縦),横幅,高さ縦幅) 
+function tryShoot(){
+    bullets.push({
+        x:player.x,
+        y:player.y,
+        width:10,
+        height:10,
+        vy: BULLET_SPEED,
+    })
+}
 
-//自分のキャラクターに見立てて四角形をとりあえず作ってみてください。
 
-//width="480" height="640"
-let x=225;
+
+
 
 window.addEventListener("keydown",(e) =>{
     if(e.key==="ArrowLeft"){
@@ -20,11 +37,24 @@ window.addEventListener("keydown",(e) =>{
     } else if(e.key==="ArrowDown"){
         //下キーが押されたときの処理
         x +=10;
+    }else if(e.key==="Space"){
+        tryShoot();
     }
-       
 });
+
+let y =0;
+let z=-150;
+function update(){
+    for(let i=0;i<bullets.length;i++){
+        const bullet=bullets[i];
+        bullet.y += bullet.vy;
+        if(bullet,y<0){
+            bullets.splice(i,1);
+        }
+    }
+}
 let y=0;
-let y2=-150;
+let z=-150;
 function gameLoop(){
  ctx.fillStyle="black";
  ctx.fillRect(0,0,canvas.width,canvas.height);  
@@ -37,7 +67,11 @@ function gameLoop(){
     y2 +=2;   
  ctx.fillStyle="blue";
  ctx.fillRect(x,480,30,30);
-    requestAnimationFrame(gameLoop);
+    
 
+    update();
+    draw();
+    requestAnimationFrame(gameLoop);
 }
 gameLoop();
+    
