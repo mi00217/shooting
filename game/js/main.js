@@ -1,13 +1,12 @@
+import { player ,initPlayer,drawPlayer} from "./player.js";
+import { spawnEnemy ,enemies} from "./enemies.js";
+
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
-const player = {
-    x: canvas.width / 2 - 15,
-    y: canvas.height - 60,
-    width: 30,
-    height: 30,
-    color: "yellow",
-    life: 3,
-};
+
+initPlayer(canvas);
+spawnEnemy(canvas);
+
 const bullets = [];
 const BULLET_SPEED = -10;
 
@@ -24,11 +23,11 @@ function tryShoot() {
 
 window.addEventListener("keydown", (e) => {
     if (e.key === "ArrowLeft") {
-        if(player.x > 10) {
+        if (player.x > 10) {
             player.x -= 10;
         }
     } else if (e.key === "ArrowRight") {
-        if(player.x < canvas.width - player.width - 10){
+        if (player.x < canvas.width - player.width - 10) {
             player.x += 10;
         }
     } else if (e.code === "Space") {
@@ -50,14 +49,18 @@ function draw() {
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = player.color;
-    ctx.fillRect(player.x, player.y, player.width, player.height);
+    drawPlayer(ctx);
 
     ctx.fillStyle = "white";
-    for(let i=0; i<bullets.length; i++) {
+    for (let i = 0; i < bullets.length; i++) {
         const bullet = bullets[i];
         ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
-    }   
+    }
+    ctx.fillStyle = "red";
+    for (let i = 0; i < enemies.length; i++) {
+        const enemy = enemies[i];
+        ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
+    }
 }
 
 function gameLoop() {
@@ -66,4 +69,3 @@ function gameLoop() {
     requestAnimationFrame(gameLoop);
 }
 gameLoop();
-
