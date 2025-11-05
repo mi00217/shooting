@@ -10,7 +10,7 @@ const ctx = canvas.getContext("2d");
 
 initPlayer(canvas);
 
-const bullets = [];
+export const bullets = [];
 const BULLET_SPEED = -5;
 
 function tryShoot() {

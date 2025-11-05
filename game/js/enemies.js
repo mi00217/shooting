@@ -17,19 +17,19 @@ export function spawnEnemy(canvas) {
  }
 }
 
-// export function updateEnemies(canvas) {
-//   for (let i = enemies.length - 1; i >= 0; i--) {
-//     const e = enemies[i];
-//     e.y += e.vy;
-//     if (e.y > canvas.height) {
-//       enemies.splice(i, 1);
-//     }
-//   }
-// }
+export function updateEnemies(canvas) {
+  for (let i = enemies.length - 1; i >= 0; i--) {
+    const e = enemies[i];
+    e.y += e.vy;
+    if (e.y > canvas.height) {
+      enemies.splice(i, 1);
+    }
+  }
+}
 
-// export function drawEnemies(ctx) {
-//   ctx.fillStyle = "crimson";
-//   for (const e of enemies) {
-//     ctx.fillRect(e.x, e.y, e.width, e.height);
-//   }
-// }
+export function drawEnemies(ctx) {
+  ctx.fillStyle = "crimson";
+  for (const e of enemies) {
+    ctx.fillRect(e.x, e.y, e.width, e.height);
+  }
+}
