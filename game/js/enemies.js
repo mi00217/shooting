@@ -1,5 +1,8 @@
 export const enemies = [];
 const SIZE = 26;
+const enemyImage = new Image(); 
+enemyImage.src = "enemy.png";
+
 
 function pushEnemies(canvas) {
   const w = SIZE;
@@ -30,6 +33,6 @@ export function updateEnemies(canvas) {
 export function drawEnemies(ctx) {
   ctx.fillStyle = "crimson";
   for (const e of enemies) {
-    ctx.fillRect(e.x, e.y, e.width, e.height);
+    ctx.drawImage(enemyImage,e.x, e.y, e.width, e.height);
   }
 }
