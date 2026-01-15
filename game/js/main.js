@@ -55,14 +55,14 @@ window.addEventListener("keydown", (e) => {
     else if (e.key === "ArrowUp") {
         if (player.y > 10) {
             player.y -= 10;
-
+        }
         } else if (e.key === "ArrowDown") {
             if (player.y < canvas.height - player.height - 10) {
                 player.y += 10;
             
         }
     
-    else if (e.code === "Space") {
+    }else if (e.code === "Space") {
         tryShoot();
     }
 });
